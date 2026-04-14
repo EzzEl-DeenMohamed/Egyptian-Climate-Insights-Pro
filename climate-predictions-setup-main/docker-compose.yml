@@ -1,0 +1,118 @@
+version: '3.8'
+
+services:
+  db:
+    image: timescale/timescaledb-ha:pg16
+    hostname: d4fdc62a50df
+    user: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+      PGROOT: /home/postgres
+      PGDATA: /home/postgres/pgdata/data
+      PGLOG: /home/postgres/pg_log
+      PGSOCKET: /home/postgres/pgdata
+      BACKUPROOT: /home/postgres/pgdata/backup
+      PGBACKREST_CONFIG: /home/postgres/pgdata/backup/pgbackrest.conf
+      PGBACKREST_STANZA: poddb
+      LC_ALL: C.UTF-8
+      LANG: C.UTF-8
+      PAGER: ""
+      POSTGRES_HOST_AUTH_METHOD: trust  # Temporary for debugging
+      POSTGRES_INITDB_ARGS: "--auth-host=trust --auth-local=trust"
+
+    volumes:
+      - pgdata:/home/postgres/pgdata
+    ports:
+      - "4444:5432"  # Matches your exact port configuration
+    networks:
+      - app-network
+    labels:
+      com.timescaledb.image.ai.version: "0.8.0"
+      com.timescaledb.image.install_method: "docker-ha"
+      com.timescaledb.image.patroni.version: "4.0.4"
+      com.timescaledb.image.pgBackRest.version: "2.54.2"
+      com.timescaledb.image.postgis.version: "3.5.2"
+      com.timescaledb.image.postgresql.available_versions: "16.6"
+      com.timescaledb.image.postgresql.version: "16.6"
+      com.timescaledb.image.timescaledb.available_versions: "2.12.2,2.13.0,2.13.1,2.14.0,2.14.1,2.14.2,2.15.0,2.15.1,2.15.2,2.15.3,2.16.0,2.16.1,2.17.0,2.17.1,2.17.2,2.18.0"
+      com.timescaledb.image.timescaledb.version: "2.18.0"
+      com.timescaledb.image.timescaledb_toolkit.available_versions: "1.18.0,1.19.0"
+      com.timescaledb.image.timescaledb_toolkit.version: "1.19.0"
+      com.timescaledb.image.vectorscale.available_versions: "0.2.0,0.3.0,0.4.0,0.5.0,0.5.1"
+      com.timescaledb.image.vectorscale.version: "0.5.1"
+      org.opencontainers.image.created: "2025-02-04T15:27:09+00:00"
+      org.opencontainers.image.revision: "refs/heads/master"
+      org.opencontainers.image.source: "https://github.com/timescale/timescaledb-docker-ha"
+      org.opencontainers.image.vendor: "Timescale"
+
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./climate-predictions-backend
+    ports:
+      - "8001:8000"
+    volumes:
+      # Mount the JSON files from the etl directory
+      - ./climate-predictions-backend:/app
+      - ./climate-predictions-backend/etl/climate_parameters.json:/app/climate_parameters.json
+      - ./climate-predictions-backend/etl/mappings.json:/app/mappings.json
+      - ./climate-predictions-backend/etl/scenarios.json:/app/scenarios.json
+
+      # Mount the NC_files directory from your project root
+      - ./NC_files:/app/NC_files
+
+      # Mount the geodatabase (choose one)
+      - ./New File Geodatabase.gdb:/app/New File Geodatabase.gdb
+    environment:
+      - FRONTEND_URL=http://localhost:3001
+      - SRC_GEOMETRY_SRID=4326
+      - DB_GEOMETRY_SRID=4326
+      - GRID_RESOLUTION_METERS=1000
+      - LAT_MIN=22.2
+      - LAT_MAX=32.0
+      - LON_MIN=25.0
+      - LON_MAX=35.1
+      - GEO_DATABASE_PATH=/app/New File Geodatabase.gdb
+      - BASE_NC_FOLDER=/app/NC_files
+      - CLIMATE_PARAMETERS_JSON=/app/climate_parameters.json
+      - NC_VAR_NAME_MAPPING_JSON=/app/nc_var_name_mapping.json
+      - MAX_TIMESTEP_THREADS=1
+      - MAX_FILES_THREADS=1
+      - START_YEAR=1901
+      - END_YEAR=2100
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
+      - DATABASE_URL_ASYNC=postgresql+asyncpg://postgres:postgres@db:5432/postgres
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  frontend:
+    build: ./climate-predictions-frontend
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./climate-predictions-frontend:/app       # Sync host files
+      - /app/node_modules                        # Keep container's node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true                 # Enable file watching in Docker
+      - WDS_SOCKET_PORT=3000                     # Fix WebSocket connection
+      - REACT_APP_BACKEND_API_BASE_URL=http://localhost:8001/api  # Use service name instead of localhost
+      - PORT=3000
+
+    networks:
+      - app-network
+
+volumes:
+  pgdata:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge
