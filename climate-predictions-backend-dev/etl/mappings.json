@@ -1,0 +1,184 @@
+{
+    "variables": [
+        {
+            "name": "tmp",
+            "historical": {
+                "folder": "tmp",
+                "nc_var_name": "tmp",
+                "transformation": null
+            },
+            "cmip6": {
+                "folders": ["tas"],
+                "source_variables": ["tas"],
+                "transformation": "kelvin_to_celsius"
+            },
+            "upload_historical": false,
+            "upload_cmip6": false
+        },
+        {
+            "name": "tmx",
+            "historical": {
+                "folder": "tmx",
+                "nc_var_name": "tmx",
+                "transformation": null
+            },
+            "cmip6": {
+                "folders": ["tasmax"],
+                "source_variables": ["tasmax"],
+                "transformation": "kelvin_to_celsius"
+            },
+            "upload_historical": false,
+            "upload_cmip6": false
+        },
+        {
+            "name": "tmn",
+            "historical": {
+                "folder": "tmn",
+                "nc_var_name": "tmn",
+                "transformation": null
+            },
+            "cmip6": {
+                "folders": ["tasmin"],
+                "source_variables": ["tasmin"],
+                "transformation": "kelvin_to_celsius"
+            },
+            "upload_historical": false,
+            "upload_cmip6": false
+        },
+        {
+            "name": "pre",
+            "historical": {
+                "folder": "pre",
+                "nc_var_name": "pre",
+                "transformation": null
+            },
+            "cmip6": {
+                "folders": ["pr"],
+                "source_variables": ["pr"],
+                "transformation": "pr_to_mm_month"
+            },
+            "upload_historical": false,
+            "upload_cmip6": false
+        },
+        {
+            "name": "pet",
+            "historical": {
+                "folder": "pet",
+                "nc_var_name": "pet",
+                "transformation": null
+            },
+            "cmip6": {
+                "folders": ["evspsblpot"],
+                "source_variables": ["evspsblpot"],
+                "transformation": "evspsblpot_to_mm_day"
+            },
+            "upload_historical": false,
+            "upload_cmip6": true
+        },
+        {
+            "name": "cld",
+            "historical": {
+                "folder": "cld",
+                "nc_var_name": "cld",
+                "transformation": null
+            },
+            "cmip6": {
+                "folders": ["clt"],
+                "source_variables": ["clt"],
+                "transformation": null
+            },
+            "upload_historical": false,
+            "upload_cmip6": false
+        },
+        {
+            "name": "ws",
+            "historical": {
+                "folder": "ws",
+                "nc_var_name": "ws",
+                "transformation": null
+            },
+            "cmip6": {
+                "folders": ["sfcWind"],
+                "source_variables": ["sfcWind"],
+                "transformation": null
+            },
+            "upload_historical": false,
+            "upload_cmip6": false
+        },
+        {
+            "name": "vap",
+            "historical": {
+                "folder": "vap",
+                "nc_var_name": "vap",
+                "transformation": null
+            },
+            "cmip6": {
+                "folders": ["hurs", "tas"],
+                "source_variables": ["hurs", "tas"],
+                "transformation": "derive_vapor_pressure"
+            },
+            "upload_historical": false,
+            "upload_cmip6": false
+        },
+        {
+            "name": "sm",
+            "historical": {
+                "folder": "soil",
+                "nc_var_name": "soil",
+                "transformation": null
+            },
+            "cmip6": {
+                "folders": ["mrso"],
+                "source_variables": ["mrso"],
+                "transformation": null
+            },
+            "upload_historical": false,
+            "upload_cmip6": false
+        },
+        {
+            "name": "frs",
+            "historical": {
+                "folder": "frs",
+                "nc_var_name": "frs",
+                "transformation": null
+            },
+            "cmip6": {
+                "folders": ["tasmin_daily"],
+                "source_variables": ["tasmin"],
+                "transformation": "frost_days"
+            },
+            "upload_historical": false,
+            "upload_cmip6": false
+        },
+        {
+            "name": "wet",
+            "historical": {
+                "folder": "wet",
+                "nc_var_name": "wet",
+                "transformation": null
+            },
+            "cmip6": {
+                "folders": ["pr_daily"],
+                "source_variables": ["pr"],
+                "transformation": "wet_days"
+            },
+            "upload_historical": false,
+            "upload_cmip6": true
+        },
+        {
+            "name": "dtr",
+            "historical": {
+                "folder": "dtr",
+                "nc_var_name": "dtr",
+                "transformation": null
+            },
+            "cmip6": {
+                "folders": ["tasmin_daily", "tasmax_daily"],
+                "source_variables": ["tasmin", "tasmax"],
+                "transformation": "diurnal_temperature_range"
+            },
+            "upload_historical": false,
+            "upload_cmip6": false
+        }
+    ]
+}

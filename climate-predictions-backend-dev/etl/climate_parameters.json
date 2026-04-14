@@ -1,0 +1,86 @@
+[
+    {
+        "id": 1,
+        "code": "tmp",
+        "name": "Daily Mean Temperature",
+        "unit": "Celsius °C",
+        "description": "The average temperature recorded over a 24-hour period."
+    },
+    {
+        "id": 2,
+        "code": "tmx",
+        "name": "Monthly average Daily maximum Temperature",
+        "unit": "Celsius °C",
+        "description": "The average of the daily maximum temperatures recorded over a month."
+    },
+    {
+        "id": 3,
+        "code": "tmn",
+        "name": "Monthly average Daily minimum Temperature",
+        "unit": "Celsius °C",
+        "description": "The average of the daily minimum temperatures recorded over a month."
+    },
+    {
+        "id": 4,
+        "code": "pre",
+        "name": "Precipitation",
+        "unit": "Millimeters mm",
+        "description": "The total amount of rainfall or snowfall converted to millimeters of water."
+    },
+    {
+        "id": 5,
+        "code": "pet",
+        "name": "Potential Evapotranspiration",
+        "unit": "Millimeters mm",
+        "description": "The amount of water that could be evaporated and transpired if sufficient water was available."
+    },
+    {
+        "id": 6,
+        "code": "cld",
+        "name": "Cloud Cover",
+        "unit": "Percentage %",
+        "description": "The fraction of the sky covered by clouds, expressed as a percentage."
+    },
+    {
+        "id": 7,
+        "code": "frs",
+        "name": "Forest day frequency",
+        "unit": "Days",
+        "description": "Number of days in a month when frost conditions were observed."
+    },
+    {
+        "id": 8,
+        "code": "wet",
+        "name": "Wet day frequency",
+        "unit": "Days",
+        "description": "Number of days in a month with precipitation greater than 1 mm."
+    },
+    {
+        "id": 9,
+        "code": "dtr",
+        "name": "Diurnal temperature range",
+        "unit": "Celsius °C",
+        "description": "The difference between the daily maximum and minimum temperatures."
+    },
+    {
+        "id": 10,
+        "code": "ws",
+        "name": "Wind speed",
+        "unit": "Meters per second m/s",
+        "description": "The average speed of wind over a specified period."
+    },
+    {
+        "id": 11,
+        "code": "vap",
+        "name": "Vapor Pressure",
+        "unit": "Hectopascals hPa",
+        "description": "The pressure exerted by water vapor in the air."
+    },
+    {
+        "id": 12,
+        "code": "sm",
+        "name": "Soil Moisture",
+        "unit": "Cubic meters per cubic meter m³/m³",
+        "description": "The amount of water contained in the soil, typically in the top 1–2 meters."
+    }
+]

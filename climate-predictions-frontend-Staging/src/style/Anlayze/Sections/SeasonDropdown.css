@@ -1,0 +1,30 @@
+.season-dropdown {
+  border-radius: 8px !important;
+  padding: 8px !important;
+  /*border: 1px solid #ccc;*/
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease-in-out !important;
+  background: #b4b4b4 !important;
+  color: #000 !important;
+  font-size: 0.9rem !important;
+  text-align: center !important;
+}
+
+.season-dropdown:hover {
+  background: #979797 !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3) !important;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8) !important;
+}
+
+.season-dropdown:active {
+  transform: scale(0.98) !important;
+}
+
+.season-dropdown .MuiSelect-icon {
+  color: #535252 !important;
+}
+
+.season-dropdown .MuiMenuItem-root {
+  font-weight: 400 !important;
+}

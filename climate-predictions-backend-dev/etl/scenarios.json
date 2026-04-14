@@ -1,0 +1,17 @@
+[
+  {
+    "code": "ssp245",
+    "desc": "Moderate emissions",
+    "display_name": "moderate scenario"
+  },
+  {
+    "code": "ssp370",
+    "desc": "Higher emissions, limited mitigation",
+    "display_name": "worst-case scenario"
+  },
+  {
+    "code": "historical",
+    "desc": "Historical data",
+    "display_name": "historical data"
+  }
+]

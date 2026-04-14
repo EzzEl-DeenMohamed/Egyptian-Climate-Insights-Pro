@@ -1,0 +1,11 @@
+.custom-checkbox {
+  color: rgba(50, 50, 52, 0.87) !important;
+  border: 1px solid rgba(50, 50, 52, 0.87) !important;
+  border-radius: 8px !important;
+  padding: 1px !important;
+}
+
+/* Styles when checked */
+.custom-checkbox.Mui-checked {
+  color: rgba(50, 50, 52, 0.87) !important;
+}
